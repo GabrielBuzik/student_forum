@@ -26,6 +26,7 @@ Student forum written on Django
   ```
     git clone git@github.com:javitocor/Affiliate-website-Django.git
   ```
+  - Create your own SECRET_KEY, PSQL_PASSWORD, EMAIL_HOST and save it to .env with settings.py
   - Go to this repository and set up vurtual environment
   ```
     python3.10 -m venv venv
@@ -44,3 +45,4 @@ Student forum written on Django
   ```
     python3 manage.py runserver
   ```
+  - If something is wrong, feel free to contact me

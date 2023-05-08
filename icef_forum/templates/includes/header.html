@@ -36,7 +36,7 @@
             <a href="{% url 'discussions:vacancy_list' %}">All Vacancies</a>
             <a href="{% url 'discussions:create_vacancy' %}">Publish Vacancy</a>
           </div></li>
-        <li><a href="#" class="nav-link px-2 text-white">About</a></li>
+        <li><a href="{% url 'about:project' %}" class="nav-link px-2 text-white">About</a></li>
       </ul>
 
       <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" action="{% url 'discussions:search_results' %}" method="get">

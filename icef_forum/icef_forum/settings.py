@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'discussions.apps.DiscussionsConfig',
     'users.apps.UsersConfig',
     'core.apps.CoreConfig',
+    'about.apps.AboutConfig',
 ]
 
 MIDDLEWARE = [
