@@ -9,7 +9,8 @@ from django.template.loader import render_to_string
 from .tokens import account_activation_token  
 from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
-from django.core.mail import EmailMessage  
+from django.core.mail import EmailMessage
+from django.conf import settings
 
 
 def signup(request):  
@@ -31,7 +32,10 @@ def signup(request):
             })
             to_email = form.cleaned_data.get('email')
             email = EmailMessage(
-                            mail_subject, message, to=[to_email]
+                            mail_subject,
+                            message,
+                            settings.EMAIL_HOST_USER,
+                            to=[to_email]
             )
             email.send()
             return render(

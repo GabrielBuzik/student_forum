@@ -89,12 +89,12 @@ ICEF FORUM
   </div>
   <div class="col-sm-12 col-md-12 col-xl-3" style="#">
 
-    <div class="card" style="width: 18rem;margin-top:40px;">
+    <div class="card" style="margin-top:40px;">
       <h5 style="text-align: center ">Свежая вакансия</h5>
       <img class="card-img-top" src="static/img/banker.jpg" alt="Card image cap">
       <h6 style="text-align: center ">{{vacancy.title}}</h6>
       <p>{{vacancy.text|slice:":100"|linebreaks}}...
-        <a href="{% url 'discussions:vacancy_list'%}">подробнее</a>
+        <a href="{% url 'discussions:vacancy_list'%}" style="color:#000000">подробнее</a>
       </p>
     </div>
 
@@ -104,26 +104,26 @@ ICEF FORUM
     <img class="card-img-top" src="static/img/professor.jpg" alt="Card image cap">
     <div class="card-body" style="text-align: center ">
     {% for professor in most_discussed_professors %}
-    <a href="{% url 'discussions:professor' professor.slug %}" style="text-align: center ">
+    <a href="{% url 'discussions:professor' professor.slug %}" style="text-align: center ;color:#000000">
       {{professor.title}}: {{professor.posts.count}} posts
     </a><br>
     {% endfor %}
     <hr>
-    <a href="{% url 'discussions:professors_rating' "postnum" %}">Весь рейтинг</a>
+    <a href="{% url 'discussions:professors_rating' "postnum" %}" style="color:#000000">Весь рейтинг</a>
   </div>
   </div>
-  <div class="col-3" style="#">
-    <div class="card" style="width: 18rem;margin-top:40px;">
+  <div class="col" style="#">
+    <div class="card" style="margin-top:40px;">
     <h5 style="text-align: center ">Самые одобряемые преподаватели</h5>
     <img class="card-img-top" src="static/img/teachers_talking.JPG" alt="Card image cap">
     <div class="card-body" style="text-align: center ">
     {% for professor in most_approved_professors %}
-    <a href="#" style="text-align: center ">
+    <a href="#" style="text-align: center;color:#000000">
       {{professor.title}}: {{professor.num_approvals}} approvals
     </a><br>
     {% endfor %}
     <hr>
-    <a href="{% url 'discussions:professors_rating' "approvalsnum" %}">Весь рейтинг</a>
+    <a href="{% url 'discussions:professors_rating' "approvalsnum" %}" style="color:#000000">Весь рейтинг</a>
   </div>
 
 

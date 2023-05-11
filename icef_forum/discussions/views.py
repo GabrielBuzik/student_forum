@@ -1,6 +1,6 @@
-from django.views.generic import TemplateView, ListView
+from django.views.generic import ListView
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Post,Comment, Professor, Approval,Rating, Course, Job, Vacancy
+from .models import Post, Comment, Professor, Approval, Rating, Course, Job, Vacancy
 from django.db.models import Count, Q
 from django.core.paginator import Paginator
 from .forms import PostForm, RatingForm, VacancyForm, CommentForm
@@ -8,13 +8,15 @@ from django.contrib.auth.decorators import login_required
 
 POSTS_PER_PAGE = 12
 
-# Объединить write functions 
+# Объединить write functions
+
 
 def get_page_object(request, post_list, POSTS_PER_PAGE):
     paginator = Paginator(post_list, POSTS_PER_PAGE)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     return page_obj
+
 
 class SearchResultsView(ListView):
     model = Post
@@ -26,6 +28,7 @@ class SearchResultsView(ListView):
             Q(title__icontains=query) | Q(text__icontains=query)
         )
         return object_list
+
 
 def index(request):
     post_list = Post.objects.all()[:10]
@@ -40,15 +43,17 @@ def index(request):
     context = {
         'post_list': post_list,
         'most_discussed_professors': most_discussed_professors,
-        'most_approved_professors':most_approved_professors,
+        'most_approved_professors': most_approved_professors,
         'vacancy': last_vacancy,
-        'rating_form':rating_form
+        'rating_form': rating_form
     }
 
     template = 'discussions/index.html'
-    return render(request,template,context)
+    return render(request, template, context)
 
 # Posts
+
+
 def post_detail(request, post_id):
     post = Post.objects.get(id=post_id)
     comments = Comment.objects.filter(post=post_id)
@@ -58,10 +63,12 @@ def post_detail(request, post_id):
         'post': post,
         'comments': comments,
         'form': comment_form,
-        'rating_form':rating_form
+        'rating_form': rating_form
     }
     return render(request, 'discussions/post_detail.html', context)
+
 # Comments
+
 
 @login_required
 def add_comment(request, post_id):
@@ -132,7 +139,6 @@ def professors_search(request):
     template = 'discussions/professor_list.html'
 
     return render(request,template,context)
-
 
 def professors_rating(request,slug):
 
@@ -268,7 +274,7 @@ def courses_search(request):
     )
     page_obj = get_page_object(request, course_list, POSTS_PER_PAGE)
     context = {
-        'page_obj': page_obj,
+        'page_obj': page_obj
     }
 
     template = 'discussions/course_list.html'

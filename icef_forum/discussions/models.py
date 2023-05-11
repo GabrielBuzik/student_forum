@@ -6,9 +6,10 @@ from django.db.models import Avg
 from django.db.models import Q, Case, When
 
 
-User = get_user_model() 
+User = get_user_model()
 
 # Discussions
+
 
 class Discussion(models.Model):
     title = models.CharField(max_length=200)
@@ -18,7 +19,7 @@ class Discussion(models.Model):
 
     def __str__(self) -> str:
         return self.title
-    
+
     class Meta:
         abstract = True
 
@@ -108,13 +109,14 @@ class Post(Record):
         return cleaned_data
         
     def average_rating(self):
-        return Rating.objects.filter(post=self).aggregate(Avg("rating"))["rating__avg"]
+        return Rating.objects.filter(
+            post=self).aggregate(Avg("rating"))["rating__avg"]
 
 
 class Comment(Record):
     post = models.ForeignKey(
-        Post, 
-        on_delete=models.SET_NULL, 
+        Post,
+        on_delete=models.SET_NULL,
         null=True
     )
     author = models.ForeignKey(
@@ -125,20 +127,26 @@ class Comment(Record):
 
 class Vacancy(Record):
     company = models.CharField(max_length=100)
-    link = models.URLField(max_length=250,
+    link = models.URLField(
+        max_length=250,
         null=True,
-        blank=True)
-    job = models.ForeignKey(Job, 
+        blank=True,
+    )
+    job = models.ForeignKey(
+        Job,
         on_delete=models.CASCADE,
         related_name='vacancies',
         null=True,
-        blank=True)
+        blank=True
+    )
     author = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
         related_name='vacancies'
     )
+
 # Ratings and approvals
+
 
 class Rating(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -162,9 +170,10 @@ class Rating(models.Model):
             )
         ]
 
+
 class Approval(models.Model):
     user = models.ForeignKey(
-        User, 
+        User,
         on_delete=models.CASCADE,
         related_name='approves'
     )

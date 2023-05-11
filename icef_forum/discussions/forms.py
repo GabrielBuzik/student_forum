@@ -1,17 +1,18 @@
 from django import forms
-from .models import Post,Rating,Vacancy, Comment
+from .models import Post, Rating, Vacancy, Comment
 
 
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ['text','title','professor','course','job']
+        fields = ['text', 'title', 'professor', 'course', 'job']
         labels = {
            'text': ('Текст поста'),
         }
         help_texts = {
             'text': ('Текст нового поста '),
         }
+
 
 class CommentForm(forms.ModelForm):
     class Meta:
@@ -30,21 +31,23 @@ class RatingForm(forms.ModelForm):
         model = Rating
         fields = ['rating']
         widgets = {
-            'rating': forms.Select(choices=[(1,1),(2,2),(3,3),(4,4),(5,5)])
+            'rating': forms.Select(
+            choices=[(1, 1), (2, 2), (3, 3), (4, 4), (5, 5)])
         }
+
 
 class VacancyForm(forms.ModelForm):
     class Meta:
         model = Vacancy
-        fields = ['text', 'title', 'company','link','job']
+        fields = ['text', 'title', 'company', 'link', 'job']
         labels = {
             'text': ('Vacancy text'),
-            'title':('Vacancy title'),
+            'title': ('Vacancy title'),
             'company': ('Hiring company'),
-            'link':('Link')
+            'link': ('Link')
         }
         help_texts = {
             'text': ('Text of the vacancy '),
             'company': ('What company is hiring '),
-            'link':('Link to the original vacancy or hiring company web site')
+            'link': ('Link to the original vacancy or hiring company web site')
         }
