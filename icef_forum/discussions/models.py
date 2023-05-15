@@ -117,6 +117,7 @@ class Comment(Record):
     post = models.ForeignKey(
         Post,
         on_delete=models.SET_NULL,
+        related_name='comments',
         null=True
     )
     author = models.ForeignKey(

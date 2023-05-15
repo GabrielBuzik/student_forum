@@ -11,6 +11,7 @@ urlpatterns = [
     path('professors/<slug:slug>/write/', views.professor_write, name='professor_write'),
     path('professors/<slug:slug>/approve/', views.professor_approve, name='professor_approve'),
     path('professors/<slug:slug>/disapprove/', views.professor_disapprove, name='professor_disapprove'),
+    path('posts/rating/', views.post_rating, name='post_rating'),
     path('posts/<int:post_id>/rate/', views.post_rate, name='post_rate'),
     path('posts/<int:post_id>/detail/', views.post_detail, name='post_detail'),
     path(

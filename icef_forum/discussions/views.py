@@ -115,7 +115,7 @@ def professor_discussion(request, slug):
 
 
 def professors_list(request):
-    professor_list = Professor.objects.all()
+    professor_list = Professor.objects.all().order_by('title')
     page_obj = get_page_object(request, professor_list, POSTS_PER_PAGE)
 
     context = {
@@ -217,6 +217,19 @@ def post_rate(request,post_id):
         rating.save()
     return redirect('discussions:post_detail', post_id=rating.post.id)
 
+
+def post_rating(request):
+    posts = Post.objects.annotate(
+            num_comments=Count("comments"),
+        ).order_by("-num_comments")[:10]
+    context = {
+        'posts':posts
+    }
+
+    template = 'discussions/posts_rating.html'
+    return render(request, template, context)
+
+
 # Course related views
 
 def course_discussion(request, slug):
@@ -256,7 +269,7 @@ def course_write(request,slug):
     return redirect('discussions:course', slug=slug)
 
 def courses_list(request):
-    courses_list = Course.objects.all()
+    courses_list = Course.objects.all().order_by('title')
     page_obj = get_page_object(request, courses_list, POSTS_PER_PAGE)
 
     context = {
