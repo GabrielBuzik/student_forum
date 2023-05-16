@@ -66,21 +66,21 @@ ICEF FORUM
               {% endif %}
               <p class="card-text">{{post.text|linebreaks}}</p>
               {% if post.professor %}   
-                <a href="{% url 'discussions:professor' post.professor.slug %}" class="card-link">
+                <a href="{% url 'discussions:professor' post.professor.slug %}" class="card-link" style="color:#000000">
                   Обсуждение преподавателя: {{post.professor.title}}
                 </a>
               {% endif %}
               {% if post.course %}   
-                <a href="{% url 'discussions:course' post.course.slug %}" class="card-link">
+                <a href="{% url 'discussions:course' post.course.slug %}" class="card-link" style="color:#000000">
                   Обсуждение курса: {{post.course.title}}
                 </a>
               {% endif %}
               {% if post.job %}   
-                <a href="{% url 'discussions:job' post.job.slug %}" class="card-link">
+                <a href="{% url 'discussions:job' post.job.slug %}" class="card-link" style="color:#000000">
                   Обсудить карьеру в {{post.job.title}}
                 </a>
               {% endif %}
-              <a href="{% url 'discussions:post_detail' post.id%}" class="card-link">Обсуждение поста</a>
+              <a href="{% url 'discussions:post_detail' post.id%}" class="card-link" style="color:#000000">Обсуждение поста</a>
             </div>
           </div>
       </article>

@@ -27,7 +27,7 @@ Professor list
           <p class="card-text">{{professor.description|linebreaks}}</p>
           
           <p>{{professor.title}} is approved by {{professor.approved.count}} users</p>
-          <a href="{% url 'discussions:professor' professor.slug %}" class="card-link">
+          <a href="{% url 'discussions:professor' professor.slug %}" style="color:#000000" class="card-link">
             Обсудить преподавателя в его профиле
           </a>
         </div>

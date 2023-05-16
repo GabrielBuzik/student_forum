@@ -12,14 +12,14 @@
               <p class="card-text">{{course.description}}</p>
               <p class="card-text">Преподаватели:
                 {% for professor in professors %}
-                <a href="{% url 'discussions:professor' professor.slug %}">{{professor.title}}</a>,
+                <a href="{% url 'discussions:professor' professor.slug %}" style="color:#000000">{{professor.title}}</a>,
                 {% endfor %}
               </p>
     
           </div>
         </div>
       </div>
-      <a href="{% url 'discussions:courses_list' %}">
+      <a href="{% url 'discussions:courses_list' %}" style="color:#000000">
         Полный список курсов
       </a>
     </div>

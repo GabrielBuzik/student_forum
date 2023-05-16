@@ -15,10 +15,10 @@ Job list
         <div class="card-body">
           <h5 style="font-size: 30px" class="card-title">{{job.title}}</h5>
           <p class="card-text" style="font-size: 17px">{{job.discription|linebreaks}}</p>
-          <a href="{% url 'discussions:job' job.slug %}" class="card-link">
+          <a href="{% url 'discussions:job' job.slug %}" class="card-link" style="color:#000000">
             Обсуждение профессии
           </a>
-          <a href="{% url 'discussions:job_vacancies' job.slug %}" class="card-link">
+          <a href="{% url 'discussions:job_vacancies' job.slug %}" class="card-link" style="color:#000000">
             Вакансии в этой сфере
           </a>
     </div>
