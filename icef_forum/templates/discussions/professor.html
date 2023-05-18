@@ -16,6 +16,7 @@
         <div class="card-body">
           <h5 class="card-title">{{professor.title}}</h5>
           <p class="card-text">{{professor.description|linebreaks}}</p>
+          <a href="{{professor.profile_link}}">Официальный профиль</a>
           <p class="card-text">Курсы:
           {% for course in courses %}
           <a href="{% url 'discussions:course' course.slug %}" style="color:#000000">{{course.title}}</a>,
@@ -52,8 +53,8 @@
   
 </div>
 {% if user.is_authenticated %}
-<div class="card" style="width: 70rem;">
-  <h5 class="card-header">Поделитесь мнением и рекомендациями:</h5>
+<div class="card">
+  <h5 class="card-header">Поделитесь мнением, рекомендацией или задайте вопрос:</h5>
   <div class="card-body">
     <form method="post" action="{% url 'discussions:professor_write' professor.slug %}">
       {% csrf_token %}      
@@ -61,11 +62,15 @@
         <label for="{{ form.title.id_for_label }}">
           {{ form.title.label }}
         </label>
+        <div class="form-group">
         <p>{{form.title}}</p>
+        </div>
         <label for="{{ form.text.id_for_label }}">
           {{ form.text.label }}
         </label>
-        <p>{{form.text}}</p>
+        <div class="form-group">
+        {{form.text}}
+       </div>
         <input type="hidden" name="professor" value={{ professor.id}}>
       </div>
       <button type="submit" class="btn btn-primary" style="background-color:#D3D3D3;color:#000000;border-color:#000000">Отправить</button>
@@ -76,7 +81,7 @@
 
 {% for post in page_obj %}
 <article style="padding:7px">
-  <div class="card" style="width: 70rem;">
+  <div class="card">
       <div class="card-body">
         <h6 class="card-subtitle mb-2 text-muted">
           Автор: {{post.author}}
