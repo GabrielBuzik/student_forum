@@ -8,6 +8,10 @@ from django.db.models import Q, Case, When
 
 User = get_user_model()
 
+User._meta.get_field('email')._unique = True
+User._meta.get_field('email').blank = False
+User._meta.get_field('email').null = False
+
 # Discussions
 
 

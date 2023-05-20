@@ -40,7 +40,7 @@ def signup(request):
             email.send()
             return render(
                 request, 'users/confirmation/confirmation.html', {
-                    'text': 'Please confirm your email'
+                    'text': 'Please confirm your email '
                             'address to complete the registration'
                 }
             )
@@ -61,8 +61,8 @@ def activate(request, uidb64, token):
         user.save()
         return render(
                 request, 'users/confirmation/confirmation.html', {
-                    'text': 'Thank you for your email confirmation.'
-                            'Now you can login your account.'
+                    'text': 'Thank you for your email confirmation. '
+                            'Now you can log in your account.'
                 }
             )
     else:
