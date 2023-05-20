@@ -1,6 +1,7 @@
 from django.views.generic import ListView
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Post, Comment, Professor, Approval, Rating, Course, Job, Vacancy
+from .models import Post, Comment, Professor, Approval, Rating
+from .models import Course, Job, Vacancy
 from django.db.models import Count, Q
 from django.core.paginator import Paginator
 from .forms import PostForm, RatingForm, VacancyForm, CommentForm
@@ -82,6 +83,7 @@ def add_comment(request, post_id):
 
 # Professor related views
 
+
 def professor_discussion(request, slug):
     professor = get_object_or_404(Professor, slug=slug)
     template = 'discussions/professor.html'
@@ -124,7 +126,7 @@ def professors_list(request):
 
     template = 'discussions/professor_list.html'
 
-    return render(request,template,context)
+    return render(request, template, context)
 
 def professors_search(request):
     query = request.GET.get("q")
@@ -138,7 +140,7 @@ def professors_search(request):
 
     template = 'discussions/professor_list.html'
 
-    return render(request,template,context)
+    return render(request, template, context)
 
 def professors_rating(request,slug):
 
@@ -154,17 +156,16 @@ def professors_rating(request,slug):
         ).order_by("-num_approvals")
         rating_parameter = 'количество одобрений'
 
-
     context = {
         'professor_list': professor_list,
         'rating_parameter':rating_parameter
     }
-    
+
     template = 'discussions/professor_rating.html'
-    return render(request,template,context)
+    return render(request, template, context)
 
 @login_required
-def professor_write(request,slug):
+def professor_write(request, slug):
     form = PostForm(request.POST)
     if form.is_valid():
         post = form.save(commit=False)
@@ -173,8 +174,9 @@ def professor_write(request,slug):
         post.save()
     return redirect('discussions:professor', slug=slug)
 
+
 @login_required
-def professor_approve(request,slug):
+def professor_approve(request, slug):
     user = request.user
     professor = Professor.objects.get(slug=slug)
     if not user.approves.filter(professor=professor).exists():
@@ -184,8 +186,9 @@ def professor_approve(request,slug):
         )
     return redirect('discussions:professor', slug=slug)
 
+
 @login_required
-def professor_disapprove(request,slug):
+def professor_disapprove(request, slug):
     user = request.user
     professor = Professor.objects.get(slug=slug)
     approval = professor.approved.filter(user=user)
@@ -223,7 +226,7 @@ def post_rating(request):
             num_comments=Count("comments"),
         ).order_by("-num_comments")[:10]
     context = {
-        'posts':posts
+        'posts': posts
     }
 
     template = 'discussions/posts_rating.html'
@@ -239,7 +242,7 @@ def course_discussion(request, slug):
     page_obj = get_page_object(request, post_list, POSTS_PER_PAGE)
     post_form = PostForm()
     rating_form = RatingForm()
-    professors =  course.professor_set.all()
+    professors = course.professor_set.all()
     if request.user.is_authenticated:
         user_ratings = Rating.objects.filter(
             user=request.user,
@@ -268,6 +271,7 @@ def course_write(request,slug):
         post.save()
     return redirect('discussions:course', slug=slug)
 
+
 def courses_list(request):
     courses_list = Course.objects.all().order_by('title')
     page_obj = get_page_object(request, courses_list, POSTS_PER_PAGE)
@@ -278,7 +282,8 @@ def courses_list(request):
 
     template = 'discussions/course_list.html'
 
-    return render(request,template,context)
+    return render(request, template, context)
+
 
 def courses_search(request):
     query = request.GET.get("q")
@@ -292,10 +297,12 @@ def courses_search(request):
 
     template = 'discussions/course_list.html'
 
-    return render(request,template,context)
+    return render(request, template, context)
 
 # Jobs
-def job_discussion(request,slug):
+
+
+def job_discussion(request, slug):
     job = get_object_or_404(Job, slug=slug)
     template = 'discussions/job.html'
     post_list = job.posts.all()
@@ -319,7 +326,8 @@ def job_discussion(request,slug):
 
     return render(request, template, context)
 
-def job_vacancies(request,slug):
+
+def job_vacancies(request, slug):
     job = get_object_or_404(Job, slug=slug)
     template = 'discussions/job.html'
     vacancy_list = job.vacancies.all()
@@ -330,6 +338,7 @@ def job_vacancies(request,slug):
     }
 
     return render(request, template, context)
+
 
 @login_required
 def job_write(request,slug):
@@ -351,9 +360,10 @@ def jobs_list(request):
 
     template = 'discussions/jobs_list.html'
 
-    return render(request,template,context)
+    return render(request, template, context)
 
 # Vacancies
+
 
 def vacancy_list(request):
     vacancy_list = Vacancy.objects.all()
@@ -363,7 +373,8 @@ def vacancy_list(request):
     }
     template = 'discussions/vacancy_list.html'
 
-    return render(request,template,context)
+    return render(request, template, context)
+
 
 @login_required
 def create_vacancy(request):

@@ -13,10 +13,10 @@ from django.core.mail import EmailMessage
 from django.conf import settings
 
 
-def signup(request):  
-    if request.method == 'POST':  
+def signup(request):
+    if request.method == 'POST':
         form = SignupForm(request.POST)  
-        if form.is_valid():  
+        if form.is_valid():
             # save form in the memory not in database  
             user = form.save(commit=False)
             user.is_active = False

@@ -111,7 +111,7 @@ class Post(Record):
         if not self.professor and not self.course and not self.job:
             raise ValidationError('A post must belong to a discussion.')
         return cleaned_data
-        
+
     def average_rating(self):
         return Rating.objects.filter(
             post=self).aggregate(Avg("rating"))["rating__avg"]
@@ -164,10 +164,10 @@ class Rating(models.Model):
         default=0,
         validators=[MinValueValidator(1), MaxValueValidator(5)]
     )
-    
+
     def __str__(self):
         return f"{self.post.title}: {self.rating}"
-    
+
     class Meta:
         constraints = [
             models.UniqueConstraint(
